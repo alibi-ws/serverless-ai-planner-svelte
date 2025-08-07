@@ -1,58 +1,87 @@
-# Svelte library
+# Cloudflare Worker with Svelte Frontend
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+This project sets up a Cloudflare Worker with a Svelte frontend using the latest tools.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+---
 
-## Creating a project
+## ✅ Prerequisites
 
-If you're seeing this, you've probably already done this step. Congrats!
+Make sure you have the following installed:
 
-```sh
-# create a new project in the current directory
-npx sv create
+- [Node.js](https://nodejs.org/) v20.0 or higher  
+- [npm](https://www.npmjs.com/)
+- [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install/)
 
-# create a new project in my-app
-npx sv create my-app
+To install Wrangler globally:
+
+```bash
+npm install -D wrangler@latest
 ```
 
-## Developing
+---
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 🚀 Setup
 
-```sh
-npm run dev
+### 1. Create a new Cloudflare Worker with Svelte
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```bash
+npm create cloudflare@latest -- <name-of-worker>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+Follow the prompts and select **Svelte** when asked for a template.
 
-## Building
+### 2. Replace Svelte Page
 
-To build your library:
+Replace the file at:
 
-```sh
-npm pack
+```
+my-svelte-app/src/routes/+page.svelte
 ```
 
-To create a production version of your showcase app:
+with your custom version from the `worker`.
 
-```sh
-npm run build
+### 3. Deploy
+
+```bash
+npm run deploy
 ```
 
-You can preview the production build with `npm run preview`.
+Your worker should now be live.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+---
 
-## Publishing
+## 🌐 Worker Address
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+You can access the deployed app at:
 
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm publish
 ```
+https://worker-svelte.alireza78-bk.workers.dev/
+```
+
+---
+
+## 📁 Project Structure (after setup)
+
+```
+my-svelte-app/
+├── src/
+│   └── routes/
+│       └── +page.svelte    <-- Replace this file
+├── wrangler.toml
+├── package.json
+└── ...
+```
+
+---
+
+## 🛠 Notes
+
+- Be sure to set up any required environment variables using:
+
+```bash
+npx wrangler secret put <YOUR_SECRET_NAME>
+```
+
+- For API calls from the frontend, use relative paths or Workers’ full URLs depending on your setup.
+
+---
