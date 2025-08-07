@@ -38,7 +38,7 @@
 </script>
 
 <div>
-	<h1>Simple SvelteKit 5 Form</h1>
+	<h1>Check status and Itinerary</h1>
 	<input 
 		type="text" 
 		placeholder="Enter something..." 
